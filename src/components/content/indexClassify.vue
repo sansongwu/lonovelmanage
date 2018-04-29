@@ -9,7 +9,7 @@
         <el-input v-model="obj.categoryName" placeholder="请输入内容"></el-input>
       </div>
       <div class="item">
-        <span>选择类目</span>
+        <span>是否展示该类</span>
         <template>
           <el-select v-model="obj.state" placeholder="请选择">
             <el-option
@@ -110,6 +110,7 @@
         }],
 
         obj:{
+          id:this.indexClassify,
           state: 0,
           /*分类名字*/
           categoryName: '',
@@ -171,7 +172,7 @@
             for(var key in data){
               that.obj[key] = data[key]
             }
-
+            console.log(that.obj)
           },
           fail: function (status) {
             console.log('状态码为' + status);   // 此处为执行成功后的代码

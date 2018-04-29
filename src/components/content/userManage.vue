@@ -211,6 +211,7 @@ import ajax from '../fun/ajax.js'
     name: 'userManage',
     data() {
       return {
+        /*用户状态下拉*/
         userState: [{
           state: '0',
           label: '停封'

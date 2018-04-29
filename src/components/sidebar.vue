@@ -35,24 +35,30 @@
         <router-link to="/indexClassify4"><el-menu-item index="1-4" v-on:click="setindexClassify(4)">类目4</el-menu-item></router-link>
     </el-submenu>
 
-    <router-link to="/financialManage">
-      <el-menu-item index="2">
-        <i class="el-icon-home"></i>
-        <span slot="title">内容管理</span>
-      </el-menu-item>
-    </router-link>
+    <el-submenu index="2">
+      <template slot="title">
+        <i class="el-icon-location"></i>
+        <span>内容管理</span>
+      </template>
+      <router-link to="/novelInfo"><el-menu-item index="2-1" v-on:click="setindexClassify(1)">小说信息</el-menu-item></router-link>
+      <router-link to="/indexClassify2"><el-menu-item index="2-2" v-on:click="setindexClassify(2)">小说分类</el-menu-item></router-link>
+      <router-link to="/indexClassify3"><el-menu-item index="2-3" v-on:click="setindexClassify(3)">类目3</el-menu-item></router-link>
+      <router-link to="/indexClassify4"><el-menu-item index="2-4" v-on:click="setindexClassify(4)">类目4</el-menu-item></router-link>
+    </el-submenu>
   </el-menu>
 </template>
 <script>
   export default{
     name:'sidebar',
     methods: {
+      /*首页管理 内容管理下拉*/
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
       },
+
       setindexClassify:function (data) {
         this.$store.commit('setIndexClassify',data)
       }
