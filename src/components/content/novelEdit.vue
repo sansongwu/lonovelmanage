@@ -26,9 +26,9 @@
           <el-select v-model="novelInfo.state" placeholder="请选择">
             <el-option
               v-for="item in novelClassify"
-              :key="item.state"
-              :label="item.label"
-              :value="item.state">
+              :key="item.id"
+              :label="item.typeName"
+              :value="item.id">
             </el-option>
           </el-select>
         </template>

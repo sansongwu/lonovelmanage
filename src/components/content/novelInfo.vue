@@ -231,7 +231,7 @@
               obj.classId = data[i].id
               obj.label = data[i].typeName
               that.novelClassify.push(obj)
-              this.$store.commit('getnovelClassify',data[i])
+              that.$store.commit('getnovelClassify',data[i])
             }
           },
           fail: function (status) {
