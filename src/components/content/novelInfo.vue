@@ -231,7 +231,7 @@
               obj.classId = data[i].id
               obj.label = data[i].typeName
               that.novelClassify.push(obj)
-              //this.$store.commit('getnovelClassify',data[i])
+              this.$store.commit('getnovelClassify',data[i])
             }
           },
           fail: function (status) {
@@ -283,7 +283,7 @@
         console.log(index, row,"编辑");
         /*传值*/
         this.$store.commit('getNovelInfo',row)
-        this.$store.commit('getnovelClassify',this.novelClassify)
+        //this.$store.commit('getnovelClassify',this.novelClassify)
       },
 
       /*分页器方法*/

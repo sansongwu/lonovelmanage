@@ -69,14 +69,17 @@
       /*初始化*/
       init(){
         this.novelInfo = this.$store.state.stateNovelInfo
-        this.novelClassify = this.$store.state.novelClassify
-        /*var arr = this.$store.state.novelClassify
+        //this.novelClassify = this.$store.state.novelClassify
+        var arr = this.$store.state.novelClassify
         console.log(this.$store.state.novelClassify)
         for(var i = 0 ; i < arr.length ; i ++ ){
           this.novelClassify.push(arr[i])
-        }*/
-      }
+        }
+      },
+      /*提交*/
+      submit(){
 
+      }
     }
 
   }
