@@ -344,26 +344,6 @@ import ajax from '../fun/ajax.js'
       handleEdit(index, row) {
         console.log(index, row,"恢复");
         if(row.state==0){
-          /*console.log(row.state);
-          var changeState = 1
-          ajax.ajax(
-            {
-              url: "/lonovel/admin/operateuser", //请求地址
-              type: 'post',   //请求方式
-              data: {id:row.id,state:changeState}, //请求参数
-              dataType: "json",     // 返回值类型的设定
-              async: true,   //是否异步
-              success: function (response, xml) {
-                if(response.code == 200){
-                  row.state = changeState
-                }
-              },
-              fail: function (status) {
-                alert('状态码为' + status);   // 此处为执行成功后的代码
-              }
-            }
-          )*/
-
           ajax.setState({
             url:'/lonovel/admin/operateuser',
             id:row.id,

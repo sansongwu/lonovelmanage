@@ -96,8 +96,8 @@
               <el-table-column prop="state" label="状态" width="40"></el-table-column>
               <el-table-column label="操作" width="250">
                 <template slot-scope="scope">
-                  <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">恢复</el-button>
-                  <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">冻结</el-button>
+                  <el-button size="mini" @click="handleRecover(scope.$index, scope.row)">恢复</el-button>
+                  <el-button size="mini" type="danger" @click="handleFreeze(scope.$index, scope.row)">冻结</el-button>
                   <router-link to="/financialManage/Detail">
                     <el-button size="mini" @click="handleDetail(scope.$index, scope.row)">查看明细</el-button>
                   </router-link>
@@ -291,27 +291,9 @@
       },
       /*停封 恢复 操作*/
       /*恢复  ajax*/
-      handleEdit(index, row) {
+      handleRecover(index, row) {
         console.log(index, row,"恢复");
         if(row.state==0){
-          /*console.log(row.state);
-          let changeState = 1
-          ajax.ajax(
-            {
-              url: "/lonovel/admin/operateaccount", //请求地址
-              type: 'post',   //请求方式
-              data: {id:this.id,state:changeState}, //请求参数
-              dataType: "json",     // 返回值类型的设定
-              async: true,   //是否异步
-              success: function (response, xml) {
-                console.log(response);   //   此处执行请求成功后的代码
-                row.state = response.state
-              },
-              fail: function (status) {
-                console.log('状态码为' + status);   // 此处为执行成功后的代码
-              }
-            }
-          )*/
           ajax.setState({
             url:'/lonovel/admin/operateaccount',
             id:row.id,
@@ -320,46 +302,21 @@
           })
         }
       },
-      /*停封  ajax*/
-      handleDelete(index, row) {
+      /*冻结  ajax*/
+      handleFreeze(index, row) {
         console.log(index, row,"停封");
         if(row.state==1){
-          /*console.log(row.state);
-           let changeState = 0
-           ajax.ajax(
-           {
-           url: "/lonovel/admin/operateaccount", //请求地址
-           type: 'post',   //请求方式
-           data: {id:this.id,state:changeState}, //请求参数
-           dataType: "json",     // 返回值类型的设定
-           async: true,   //是否异步
-           success: function (response, xml) {
-           console.log(response);   //   此处执行请求成功后的代码
-           row.state = response.state
-           },
-           fail: function (status) {
-           console.log('状态码为' + status);   // 此处为执行成功后的代码
-           }
-           }
-           )*/
           ajax.setState({
             url:'/lonovel/admin/operateaccount',
             id:row.id,
             state:0,   //要修改成的状态的值
             targetRow:row
           })
-
-
         }
       },
       /*资金明细*/
       handleDetail(index, row) {
         console.log(index, row,"查看明细");
-
-        /*for (var key in row ){
-          Vue.set(this.flyvalue, key, row[key])
-        }
-        console.log(this.flyvalue)*/
         this.$store.commit('getuserInfo',row)
 
       },

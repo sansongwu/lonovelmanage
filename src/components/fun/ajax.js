@@ -93,7 +93,7 @@ export default {
    targetRow:''
    */
   setState(data){
-    ajax.ajax(
+    this.ajax(
       {
         url: data.url, //请求地址
         type: "POST",   //请求方式
