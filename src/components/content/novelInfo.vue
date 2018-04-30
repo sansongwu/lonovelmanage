@@ -250,7 +250,7 @@
             dataType: "json",     // 返回值类型的设定
             async: true,   //是否异步
             success: function (response, xml) {
-              var data = response.extend.list
+              var data = response.extend.page.list
               that.totalRows = response.extend.page.total
               for(var i = 0 ; i < data.length ; i ++ ){
                 that.novelInfo.push(data[i])
