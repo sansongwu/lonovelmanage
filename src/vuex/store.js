@@ -11,6 +11,9 @@ export default new Vuex.Store({
   state:{
     stateUserInfo: {},
     indexClassify:0,
+    stateNovelInfo: {},
+    /*小说分类下拉内容*/
+    novelClassify:[]
   },
   mutations:{
     /*用户信息的传值*/
@@ -18,8 +21,19 @@ export default new Vuex.Store({
        state.stateUserInfo = data
     },
 
+    /*首页类目index传值*/
     setIndexClassify(state,data){
       state.indexClassify = data
     },
+
+    /*小说明细传值*/
+    getNovelInfo(state,data){
+      state.stateNovelInfo = data
+    },
+
+    /*小说分类传值*/
+    getnovelClassify(state,arr){
+      state.novelClassify.push(arr)
+    }
   }
 })

@@ -18,13 +18,13 @@
       <!--表格内容-->
       <template>
         <el-table :data="financialDetail" border style="width: 100%">
-          <el-table-column prop="id" label="id" width="80"></el-table-column>
-          <el-table-column prop="nickname" label="昵称" width="100"></el-table-column>
+          <el-table-column prop="id" label="id" width="180"></el-table-column>
+          <el-table-column prop="nickname" label="昵称" width="140"></el-table-column>
           <el-table-column prop="beginMoney" label="初始资金" width="80"></el-table-column>
           <el-table-column prop="moneyChange" label="变动资金" width="80"></el-table-column>
-          <el-table-column prop="action" label="变动的具体行为" width="140"></el-table-column>
-          <el-table-column prop="balance" label="剩余资金" width="140"></el-table-column>
-          <el-table-column prop="changeTime" label="变动时间" width="140"></el-table-column>
+          <el-table-column prop="action" label="变动的具体行为" width="340"></el-table-column>
+          <el-table-column prop="balance" label="剩余资金" width="80"></el-table-column>
+          <el-table-column prop="changeTime" label="变动时间" width="280"></el-table-column>
         </el-table>
       </template>
       <!--分页器-->
@@ -70,7 +70,8 @@
       this.userInfo.pageNo = 1
       this.userInfo.pageSize = 10
       console.log(this.userInfo)
-      var that = this
+      this.submit()
+      /*var that = this
       ajax.ajax(
         {
           url: "/lonovel/admin/businessdetail", //请求地址
@@ -90,22 +91,20 @@
             console.log('状态码为' + status);   // 此处为执行成功后的代码
           }
         }
-      )
+      )*/
     },
     data(){
       return {
         userInfo: '',
         count: '',
-        financialDetail:[
-          {
-            id:'id',
-            nickname:'nickname',
-            beginMoney:'beginMoney',
-            moneyChange:'moneyChange',
-            action:0,
-            balance:'balance',
-            changeTime:'changeTime'
-          },
+        financialDetail:[{
+          id:'',
+          beginMoney:'',
+          moneyChange:'',
+          action:'',
+          balance:'',
+          changeTime:'',
+        }
 
         ],
         /*分页器*/
@@ -116,16 +115,34 @@
     },
     methods: {
       /*获取数据*/
-      ajax(){
-
+      submit(){
+        var that = this
+        ajax.ajax({
+          url: "/lonovel/admin/businessdetail", //请求地址
+          type: 'post',   //请求方式
+          data: that.userInfo, //请求参数
+          dataType: "json",     // 返回值类型的设定
+          async: true,   //是否异步
+          success: function (response, xml) {
+            that.financialDetail = []
+            var data = response.extend.page.list
+            that.totalRows = response.extend.page.total
+            for(let i = 0 ; i < data.length ; i++){
+              that.financialDetail.push(data[i])
+            }
+          },
+          fail: function (status) {
+            console.log('状态码为' + status);   // 此处为执行成功后的代码
+          }
+        })
       },
       /*分页器方法*/
       /*点击分页器页码*/
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
-        Vue.set(this.obj, "pageNo", val)
-        /*this.ajax(123,JSON.stringify(this.obj),"post")*/
-        var that = this
+        Vue.set(this.userInfo, "pageNo", val)
+        this.submit()
+        /*var that = this
         ajax.ajax(
           {
             url: "/lonovel/admin/usermanager", //请求地址
@@ -134,7 +151,7 @@
             dataType: "json",     // 返回值类型的设定
             async: true,   //是否异步
             success: function (response, xml) {
-              /*var response = JSON.parse(response)*/
+              /!*var response = JSON.parse(response)*!/
               that.userInfo = []
               var data = response.extend.page.list
               that.totalRows = response.extend.page.total
@@ -146,7 +163,7 @@
               console.log('状态码为' + status);   // 此处为执行成功后的代码
             }
           }
-        )
+        )*/
       },
     },
   }

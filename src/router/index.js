@@ -7,6 +7,7 @@ import financialManage from '@/components/content/financialManage'
 import financialManageDetail from '@/components/content/financialManageDetail'
 import indexClassify from '@/components/content/indexClassify'
 import novelInfo from '@/components/content/novelInfo'
+import novelEdit from '@/components/content/novelEdit'
 
 
 Vue.use(Router)
@@ -54,11 +55,16 @@ export default new Router({
       name:'indexClassify4',
       component:indexClassify
     },
-    /*内容管理*/
+    /*内容(小说)管理*/
     {
       path:'/novelInfo',
       name:'novelInfo',
-      component:novelInfo
+      component:novelInfo,
+      children:[{
+        path: 'edit',
+        name: 'novelEdit',
+        component: novelEdit
+      }]
     },
   ]
 })

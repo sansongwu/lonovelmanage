@@ -116,11 +116,15 @@
               <template slot-scope="scope">
                 <el-button
                   size="mini"
-                  @click="handleEdit(scope.$index, scope.row)">上下架</el-button>
-                <el-button
-                  size="mini"
-                  type="danger"
-                  @click="handleDelete(scope.$index, scope.row)">编辑</el-button>
+                  @click="handleUpdown(scope.$index, scope.row)">上下架</el-button>
+
+                <router-link to="/novelInfo/edit">
+                  <el-button
+                    size="mini"
+                    type="danger"
+                    @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                </router-link>
+
               </template>
             </el-table-column>
           </el-table>
@@ -140,6 +144,8 @@
       </div>
 
     </div>
+    <!--编辑信息 子路由-->
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -194,7 +200,7 @@
           realRead:'',
           showRead:''
         }],
-        totalRows:''
+        totalRows:100
       }
     },
     methods:{
@@ -225,6 +231,7 @@
               obj.classId = data[i].id
               obj.label = data[i].typeName
               that.novelClassify.push(obj)
+              //this.$store.commit('getnovelClassify',data[i])
             }
           },
           fail: function (status) {
@@ -233,10 +240,11 @@
         })
       },
       submit(){
+        this.novelInfo = []
         var that = this
         ajax.ajax(
           {
-            url: "/lonovel/admin/operateaccount", //请求地址
+            url: "/lonovel/admin/novelmanager", //请求地址
             type: 'post',   //请求方式
             data: that.subObj, //请求参数
             dataType: "json",     // 返回值类型的设定
@@ -258,8 +266,8 @@
       /****************************展示部分的方法****************************/
       /*上下架  编辑  操作*/
       /*上下架  ajax*/
-      handleEdit(index, row) {
-        console.log(index, row,"恢复");
+      handleUpdown(index, row) {
+        console.log(index, row,"上下架");
         if(row.state==0){
           console.log(row.state);
           ajax.setState({
@@ -270,31 +278,31 @@
           })
         }
       },
-      /*停封  ajax*/
-      handleDelete(index, row) {
-        console.log(index, row,"停封");
-        if(row.state==1){
-          console.log(row.state);
-          ajax.setState({
-            url:'',
-            id:this.id,
-            state:0,   //要修改成的状态的值
-            targetRow:row
-          })
-        }
+      /*编辑  ajax*/
+      handleEdit(index, row) {
+        console.log(index, row,"编辑");
+        /*传值*/
+        this.$store.commit('getNovelInfo',row)
+        this.$store.commit('getnovelClassify',this.novelClassify)
       },
 
       /*分页器方法*/
       /*点击分页器页码*/
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
-        Vue.set(this.subObj, "pageNo", val)
+        //Vue.set(this.subObj, "pageNo", val)
+        this.subObj.pageNo = val
+        console.log(this.subObj)
         this.submit()
       },
     }
   }
 </script>
 <style>
+  /*大局观*/
+  .novel-info{
+    position: relative;
+  }
   /*顶部*/
   .novel-info .top{
     width: 1190px;

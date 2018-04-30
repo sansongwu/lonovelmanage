@@ -163,37 +163,15 @@
         /*提交的表单部分结束*/
 
         /*********************返回的内容开始*********************/
-        userInfo: [
-          {
-          id: 'id',
-          email: '4634634',
-          facebook: 'facebook',
-          twitter: 'twitter',
-          google: 'google',
-          money: 'money',
-          registerTime: 'registerTime',
-          state: '1',
-          nickname: 'nickname',
-        }, {
-          id: 'id',
-          email: 'email',
-          facebook: 'facebook',
-          twitter: 'twitter',
-          google: 'google',
-          money: 'money',
-          registerTime: 'registerTime',
-          state: '0',
-          nickname: 'nickname', date: '2016-05-04',
-        }, {
-          id: 'id',
-          email: 'email',
-          facebook: 'facebook',
-          twitter: 'twitter',
-          google: 'google',
-          money: 'money',
-          registerTime: 'registerTime',
-          state: '0',
-          nickname: 'nickname',
+        userInfo: [{
+          id:'',
+          nickname:'',
+          email:'',
+          facebook:'',
+          twitter:'',
+          google:'',
+          money:'',
+          state:''
         }],
         /*总条数*/
         totalRows: 0,
