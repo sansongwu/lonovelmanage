@@ -319,6 +319,8 @@ import ajax from '../fun/ajax.js'
         var that = this
         ajax.ajax(
           {
+            //url: "/lonovel/admin/usermanager", //请求地址
+            //url: "/news/index/usermanage", //请求地址
             url: "/lonovel/admin/usermanager", //请求地址
             type: 'post',   //请求方式
             data: that.obj, //请求参数

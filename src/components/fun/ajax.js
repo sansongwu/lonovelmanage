@@ -4,6 +4,8 @@
 export default {
   /*ajax*/
   ajax:function (options) {
+    /*测试环境修改url前面加跨域代理名字*/
+    //options.url = "aappii"+options.url
     /**
      * 传入方式默认为对象
      * */

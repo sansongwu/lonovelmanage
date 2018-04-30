@@ -23,7 +23,7 @@
       <div class="item">
         <span>分类:</span>
         <template>
-          <el-select v-model="novelInfo.state" placeholder="请选择">
+          <el-select v-model="novelClassify.id" placeholder="请选择">
             <el-option
               v-for="item in novelClassify"
               :key="item.id"
@@ -41,7 +41,9 @@
         <span>展示阅读次数:</span>
         <input type="text" v-model="novelInfo.showRead">
       </div>
-
+      <div class="submit" v-on:click="submit">
+        <el-button>确认修改</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -79,6 +81,24 @@
       /*提交*/
       submit(){
 
+        var that = this
+        this.novelInfo.typeId = this.novelClassify.id
+        console.log(this.novelInfo)
+        ajax.ajax({
+          url: "/lonovel/admin/editnovel", //请求地址
+          type: 'post',   //请求方式
+          data: that.novelInfo, //请求参数
+          dataType: "json",     // 返回值类型的设定
+          async: true,   //是否异步
+          success: function (response, xml) {
+            if (response.code == 200){
+              alert("修改成功")
+            }
+          },
+          fail: function (status) {
+            console.log('状态码为' + status);   // 此处为执行成功后的代码
+          }
+        })
       }
     }
 
@@ -114,5 +134,10 @@
     display: inline-block;
     margin-right: 20px;
 
+  }
+  .novel-edit .content{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 </style>

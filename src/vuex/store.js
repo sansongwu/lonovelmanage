@@ -34,6 +34,10 @@ export default new Vuex.Store({
     /*小说分类传值*/
     getnovelClassify(state,arr){
       state.novelClassify.push(arr)
+    },
+    /*清除小说分类的传值  因为这里重复加载会重复push*/
+    removeNovelClassify(state){
+      state.novelClassify = []
     }
   }
 })

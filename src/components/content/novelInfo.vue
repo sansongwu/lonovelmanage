@@ -154,6 +154,7 @@
     name:'novelInfo',
     created(){
       this.init()
+      console.log("小说信息组件创建")
     },
     data(){
       return{
@@ -226,6 +227,7 @@
           async: true,   //是否异步
           success: function (response, xml) {
             var data = response.extend.list
+            that.$store.commit('removeNovelClassify')
             for(var i = 0 ; i < data.length ; i ++){
               var obj = {}
               obj.classId = data[i].id
