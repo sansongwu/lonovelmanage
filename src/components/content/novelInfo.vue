@@ -26,7 +26,7 @@
           <div class="item">
             <span>分类:</span>
             <template>
-              <el-select v-model="classId" placeholder="请选择">
+              <el-select v-model="subObj.type" placeholder="请选择">
                 <el-option
                   v-for="item in novelClassify"
                   :key="item.classId"
@@ -41,7 +41,7 @@
         <div class="line-middle clearfix">
 
           <div class="item">
-            <span>翻译者:+</span>
+            <span>翻译者:</span>
             <input type="text" v-model="subObj.translater">
           </div>
 
@@ -49,7 +49,7 @@
           <div class="item">
             <span>上下架状态:</span>
             <template>
-              <el-select v-model="state" placeholder="请选择">
+              <el-select v-model="subObj.state" placeholder="请选择">
                 <el-option
                   v-for="item in userState"
                   :key="item.state"
@@ -65,11 +65,11 @@
       </div>
       </div>
       <!--下面的返回内容带分页-->
-      <!--<div class="user-manage-info">
-        &lt;!&ndash;表格内容&ndash;&gt;
+      <div class="user-manage-info">
+        <!--表格内容-->
         <template>
           <el-table
-            :data="userInfo"
+            :data="novelInfo"
             border
             style="width: 100%">
             <el-table-column
@@ -78,71 +78,66 @@
               width="80">
             </el-table-column>
             <el-table-column
-              prop="nickname"
-              label="昵称"
+              prop="bookName"
+              label="书名"
               width="100">
             </el-table-column>
             <el-table-column
-              prop="email"
-              label="邮箱"
+              prop="author"
+              label="作者"
               width="160">
             </el-table-column>
             <el-table-column
-              prop="facebook"
-              label="Facebook"
+              prop="bookSummary"
+              label="简介"
               width="160">
-            </el-table-column>
-            <el-table-column
-              prop="twitter"
-              label="Twitter"
-              width="160">
-            </el-table-column>
-            <el-table-column
-              prop="google"
-              label="google+"
-              width="120">
-            </el-table-column>
-            <el-table-column
-              prop="money"
-              label="用户资金"
-              width="80">
-            </el-table-column>
-            <el-table-column
-              prop="registerTime"
-              label="注册时间"
-              width="120 ">
             </el-table-column>
             <el-table-column
               prop="state"
-              label="状态"
-              width="40">
+              label="上下架状态"
+              width="160">
+            </el-table-column>
+            <el-table-column
+              prop="lastTime"
+              label="最后一次更新时间+"
+              width="120">
+            </el-table-column>
+            <el-table-column
+              prop="realRead"
+              label="实际阅读次数"
+              width="80">
+            </el-table-column>
+            <el-table-column
+              prop="showRead"
+              label="展示阅读次数"
+              width="120 ">
             </el-table-column>
             <el-table-column label="操作" width="150">
               <template slot-scope="scope">
                 <el-button
                   size="mini"
-                  @click="handleEdit(scope.$index, scope.row)">恢复</el-button>
+                  @click="handleEdit(scope.$index, scope.row)">上下架</el-button>
                 <el-button
                   size="mini"
                   type="danger"
-                  @click="handleDelete(scope.$index, scope.row)">停封</el-button>
+                  @click="handleDelete(scope.$index, scope.row)">编辑</el-button>
               </template>
             </el-table-column>
           </el-table>
         </template>
-        &lt;!&ndash;分页器&ndash;&gt;
+        <!--分页器-->
         <div class="page">
           <el-pagination
             background
             layout="prev, pager, next"
             :total="totalRows"
-            :page-size="pageSize"
-            :current-page="pageNo"
+            :page-size="subObj.pageSize"
+            :current-page="subObj.pageNo"
             @current-change="handleCurrentChange">
           </el-pagination>
         </div>
 
-      </div>-->
+      </div>
 
     </div>
   </div>
@@ -157,8 +152,8 @@
     data(){
       return{
         /*小说分类下拉*/
-        novelClassify: [{classId:11,lable:"武侠"},{classId:11,lable:"武侠"}],
-        classId: '',
+        novelClassify: [/*{classId:'1',label:"武"},{classId:'2',label:"侠"}*/],
+        //classId: '',
         /*上下架状态下拉*/
         userState: [{
           state: '0',
@@ -170,41 +165,55 @@
           state: '2',
           label: '异常'
         }],
-        state: '',
+        //state: '',
 
         /*其他数据*/
-        pageNo:1,
-        pageSize:10,
+        //pageNo:1,
+        //pageSize:10,
         /*提交部分*/
         subObj:{
           id:'',
           bookName:'',
           author:'',
-          type:this.classId,
+          type:'',         //this.classId,
           translater:'',
-          state:this.state,
-          pageNo:this.pageNo,
-          pageSize:this.pageSize
-        }
+          state:'',            //this.state,
+          pageNo:1,
+          pageSize:10
+        },
 
-
+        /*************************内容部分数据*************************/
+        /*返回的对象数组*/
+        novelInfo:[{
+          id:'',
+          bookName:'',
+          author:'',
+          bookSummary:'',
+          state:'',
+          lastTime:'',
+          realRead:'',
+          showRead:''
+        }],
+        totalRows:''
       }
     },
     methods:{
+      /*初始化下拉框选项*/
       init(){
-        var data = {data:[{id:'11',typeName:"武侠"}]}
+        /*测试代码*/
+        /*var data = {data:[{id:'3',typeName:"武侠"}]}
         for(var i = 0 ; i < data.data.length ; i ++){
           var obj = {}
           obj.classId = data.data[i].id
           obj.label = data.data[i].typeName
           console.log(obj)
           this.novelClassify.push(obj)
-        }
+        }*/
 
 
-        /*var that = this
+        var that = this
         ajax.ajax({
-          url: "/lonovel/admin/usermanager", //请求地址
+          url: "/lonovel/types", //请求地址
           type: 'post',   //请求方式
           data: {}, //请求参数
           dataType: "json",     // 返回值类型的设定
@@ -221,12 +230,67 @@
           fail: function (status) {
             console.log('状态码为' + status);   // 此处为执行成功后的代码
           }
-        })*/
+        })
       },
       submit(){
-        console.log(this.subObj)
-        console.log(this.novelClassify)
-      }
+        var that = this
+        ajax.ajax(
+          {
+            url: "/lonovel/admin/operateaccount", //请求地址
+            type: 'post',   //请求方式
+            data: that.subObj, //请求参数
+            dataType: "json",     // 返回值类型的设定
+            async: true,   //是否异步
+            success: function (response, xml) {
+              var data = response.extend.list
+              that.totalRows = response.extend.page.total
+              for(var i = 0 ; i < data.length ; i ++ ){
+                that.novelInfo.push(data[i])
+              }
+            },
+            fail: function (status) {
+              console.log('状态码为' + status);   // 此处为执行成功后的代码
+            }
+          }
+        )
+      },
+
+      /****************************展示部分的方法****************************/
+      /*上下架  编辑  操作*/
+      /*上下架  ajax*/
+      handleEdit(index, row) {
+        console.log(index, row,"恢复");
+        if(row.state==0){
+          console.log(row.state);
+          ajax.setState({
+            url:'',
+            id:this.id,
+            state:1,   //要修改成的状态的值
+            targetRow:row
+          })
+        }
+      },
+      /*停封  ajax*/
+      handleDelete(index, row) {
+        console.log(index, row,"停封");
+        if(row.state==1){
+          console.log(row.state);
+          ajax.setState({
+            url:'',
+            id:this.id,
+            state:0,   //要修改成的状态的值
+            targetRow:row
+          })
+        }
+      },
+
+      /*分页器方法*/
+      /*点击分页器页码*/
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+        Vue.set(this.subObj, "pageNo", val)
+        this.submit()
+      },
     }
   }
 </script>

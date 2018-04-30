@@ -294,7 +294,7 @@
       handleEdit(index, row) {
         console.log(index, row,"恢复");
         if(row.state==0){
-          console.log(row.state);
+          /*console.log(row.state);
           let changeState = 1
           ajax.ajax(
             {
@@ -311,31 +311,45 @@
                 console.log('状态码为' + status);   // 此处为执行成功后的代码
               }
             }
-          )
+          )*/
+          ajax.setState({
+            url:'/lonovel/admin/operateaccount',
+            id:row.id,
+            state:1,   //要修改成的状态的值
+            targetRow:row
+          })
         }
       },
       /*停封  ajax*/
       handleDelete(index, row) {
         console.log(index, row,"停封");
         if(row.state==1){
-          console.log(row.state);
-          let changeState = 0
-          ajax.ajax(
-            {
-              url: "/lonovel/admin/operateaccount", //请求地址
-              type: 'post',   //请求方式
-              data: {id:this.id,state:changeState}, //请求参数
-              dataType: "json",     // 返回值类型的设定
-              async: true,   //是否异步
-              success: function (response, xml) {
-                console.log(response);   //   此处执行请求成功后的代码
-                row.state = response.state
-              },
-              fail: function (status) {
-                console.log('状态码为' + status);   // 此处为执行成功后的代码
-              }
-            }
-          )
+          /*console.log(row.state);
+           let changeState = 0
+           ajax.ajax(
+           {
+           url: "/lonovel/admin/operateaccount", //请求地址
+           type: 'post',   //请求方式
+           data: {id:this.id,state:changeState}, //请求参数
+           dataType: "json",     // 返回值类型的设定
+           async: true,   //是否异步
+           success: function (response, xml) {
+           console.log(response);   //   此处执行请求成功后的代码
+           row.state = response.state
+           },
+           fail: function (status) {
+           console.log('状态码为' + status);   // 此处为执行成功后的代码
+           }
+           }
+           )*/
+          ajax.setState({
+            url:'/lonovel/admin/operateaccount',
+            id:row.id,
+            state:0,   //要修改成的状态的值
+            targetRow:row
+          })
+
+
         }
       },
       /*资金明细*/

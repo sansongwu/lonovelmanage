@@ -83,5 +83,33 @@ export default {
     arr.push(('randomNumber=' + Math.random()).replace('.',''));
     /*console.log(arr);*/
     return arr.join('&');
+  },
+
+  /*修改状态*/
+  /*参数
+   url:'',
+   id:'',
+   state:'',
+   targetRow:''
+   */
+  setState(data){
+    ajax.ajax(
+      {
+        url: data.url, //请求地址
+        type: "POST",   //请求方式
+        data: {id:data.id,state:data.state}, //请求参数
+        dataType: "json",     // 返回值类型的设定
+        async: true,   //是否异步
+        success: function (response) {
+          if(response.code == 200){
+            data.target.state = data.state
+          }
+
+        },
+        fail: function (status) {
+          console.log('状态码为' + status);   // 此处为执行成功后的代码
+        }
+      }
+    )
   }
 }

@@ -154,7 +154,7 @@
           type: 'post',   //请求方式
           data: that.initObj, //请求参数
           dataType: "json",     // 返回值类型的设定
-          async: false,   //是否异步
+          async: true,   //是否异步
           success: function (response, xml) {
             var data = response.extend.index
             /*that.categoryName = data.categoryName

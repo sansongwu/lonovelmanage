@@ -344,7 +344,7 @@ import ajax from '../fun/ajax.js'
       handleEdit(index, row) {
         console.log(index, row,"恢复");
         if(row.state==0){
-          console.log(row.state);
+          /*console.log(row.state);
           var changeState = 1
           ajax.ajax(
             {
@@ -362,14 +362,21 @@ import ajax from '../fun/ajax.js'
                 alert('状态码为' + status);   // 此处为执行成功后的代码
               }
             }
-          )
+          )*/
+
+          ajax.setState({
+            url:'/lonovel/admin/operateuser',
+            id:row.id,
+            state:1,   //要修改成的状态的值
+            targetRow:row
+          })
         }
       },
       /*停封  ajax*/
       handleDelete(index, row) {
         console.log(index, row,"停封");
         if(row.state==1){
-          console.log(row.state);
+          /*console.log(row.state);
           var changeState = 0
           ajax.ajax(
             {
@@ -387,7 +394,14 @@ import ajax from '../fun/ajax.js'
                 alert('状态码为' + status);   // 此处为执行成功后的代码
               }
             }
-          )
+          )*/
+
+          ajax.setState({
+            url:'/lonovel/admin/operateuser',
+            id:row.id,
+            state:0,   //要修改成的状态的值
+            targetRow:row
+          })
         }
       },
       /*分页器方法*/
