@@ -58,8 +58,8 @@
           </div>
         </div>
         <!--表格最下行-->
-        <!--注册时间 起始日期-->
         <div class="line-bottom clearfix">
+          <!--注册时间 起始日期-->
           <div class="signin-time lf">
             <!--选择日期-->
             <div class="date lf">
@@ -117,9 +117,6 @@
           </div>
 
         </div>
-
-
-
       </div>
       <!--下面的返回内容带分页-->
       <div class="user-manage-info">

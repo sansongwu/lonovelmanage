@@ -24,10 +24,17 @@ const produceNewsData = function() {
 }
 
 const usermanage = function () {
-  let obj0 = {}
-  obj0.extend.page.total = 12
-  obj0.extend.page.list = []
-  for(let i = 0;i<total.length; i++){
+  let data= {
+    code:200,
+    msg:"success",
+    extend:{
+      page:{
+        total:12,
+        list:[]
+      }
+    }
+  }
+  for(let i = 0;i<data.extend.page.total.length; i++){
     let obj = {}
     obj.email = Random.email('lonovel.com')
     obj.facebook = Random.email('facebook.com')
@@ -39,13 +46,46 @@ const usermanage = function () {
     obj.nickname = Random.name()
     obj.registerTime = Random.date()
     obj.state = Random.natural(1,2)
-    obj0.extend.page.list.push(obj)
+    data.extend.page.list.push(obj)
   }
-  console.log(obj0)
-  return obj0
+  return data
 
 }
 
+
+const novelClassify = function () {
+  let data= {
+    code:200,
+    msg:"success",
+    extend:{
+      page:{
+        total:12,
+        list:[]
+      }
+    }
+  }
+  for(let i = 0;i<data.extend.page.total.length; i++){
+    let obj = {
+
+    }
+  }
+}
 // Mock.mock( url, post/get , 返回的数据)；
 Mock.mock('/news/index', 'post', produceNewsData);
 Mock.mock('/news/index/usermanage', 'post', usermanage);
+
+
+
+/*
+示例:
+ var data= {
+ code:200,
+ msg:"success",
+ extend:{
+ page:{
+ total:12,
+ list:[]
+ }
+ }
+ }
+*/

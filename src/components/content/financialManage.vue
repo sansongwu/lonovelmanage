@@ -82,10 +82,7 @@
         <div class="user-manage-info">
           <!--表格内容-->
           <template>
-            <el-table
-              :data="userInfo"
-              border
-              style="width: 100%">
+            <el-table :data="userInfo" border style="width: 100%">
               <el-table-column prop="id" label="id" width="80"></el-table-column>
               <el-table-column prop="nickname" label="昵称" width="100"></el-table-column>
               <el-table-column prop="email" label="邮箱" width="160"></el-table-column>

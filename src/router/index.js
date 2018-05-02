@@ -8,6 +8,9 @@ import financialManageDetail from '@/components/content/financialManageDetail'
 import indexClassify from '@/components/content/indexClassify'
 import novelInfo from '@/components/content/novelInfo'
 import novelEdit from '@/components/content/novelEdit'
+import novelClassify from '@/components/content/novelClassify'
+import novelClassifyEdit from '@/components/content/novelClassifyEdit'
+import addNovel from '@/components/content/addNovel'
 
 
 Vue.use(Router)
@@ -65,6 +68,23 @@ export default new Router({
         name: 'novelEdit',
         component: novelEdit
       }]
+    },
+    /*小说分类*/
+    {
+      path:'/novelClassify',
+      name:'novelClassify',
+      component:novelClassify
+    },
+    {
+      path:'/novelClassify/edit',
+      name:'novelClassifyEdit',
+      component:novelClassifyEdit
+    },
+    /*新增小说*/
+    {
+      path:'/addNovel',
+      name:'addNovel',
+      component:addNovel
     },
   ]
 })
