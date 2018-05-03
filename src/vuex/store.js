@@ -14,6 +14,7 @@ export default new Vuex.Store({
     stateNovelInfo: {},
     /*小说分类下拉内容*/
     novelClassify:[]
+
   },
   mutations:{
     /*用户信息的传值*/

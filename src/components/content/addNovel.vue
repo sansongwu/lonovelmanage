@@ -66,9 +66,9 @@
             <input type="text" v-model="novelInfo.showRead">
           </div>
         </div>
-        <form ref="uploadform" id = "fileform" enctype="multipart/form-data">
+        <form ref="uploadform" id = "fileform">
           <input id="file" type="file" name="coverImg"/>
-          <button id="upload" type="button" v-on:click="submit">upload</button>
+          <button id="upload" type="button" v-on:click="subfile">upload</button>
         </form>
 
 
@@ -177,6 +177,30 @@
             console.log('状态码为' + status);   // 此处为执行成功后的代码
           }
         })*/
+      },
+      /*提交文件方法*/
+      subfile(){
+        var form=document.getElementById("fileform");
+        var formData=new FormData(form);
+        //alert(formData.name);
+        var oReq = new XMLHttpRequest();
+        oReq.onreadystatechange=function(){
+          if(oReq.readyState==4){
+            if(oReq.status==200){
+              /*console.log(typeof oReq.responseText);
+              var json=JSON.parse(oReq.responseText);
+              var result = '';
+              result +="个人信息：<br/>name:"+json['name']+"<br/>gender:"+json['gender']+"<br/>number:"+json['number'];
+              result += '<br/>头像：<img src="' + json['photo'] + '" height="50" style="border-radius: 50%;" />';
+
+              $('#result').html(result);*/
+              alert("成功了")
+            }
+          }
+        };
+        oReq.open("POST", "aappii/lonovel/admin/addnovel");
+        oReq.send(formData);
+        return false;
       }
     }
 
