@@ -11,6 +11,7 @@ import novelEdit from '@/components/content/novelEdit'
 import novelClassify from '@/components/content/novelClassify'
 import novelClassifyEdit from '@/components/content/novelClassifyEdit'
 import addNovel from '@/components/content/addNovel'
+import addNovelClassify from '@/components/content/addNovelClassify'
 
 
 Vue.use(Router)
@@ -79,6 +80,12 @@ export default new Router({
       path:'/novelClassify/edit',
       name:'novelClassifyEdit',
       component:novelClassifyEdit
+    },
+    /*添加小说分类*/
+    {
+      path:'/addNovelClassify',
+      name:'addNovelClassify',
+      component:addNovelClassify
     },
     /*新增小说*/
     {

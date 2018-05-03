@@ -13,8 +13,10 @@ export default new Vuex.Store({
     indexClassify:0,
     stateNovelInfo: {},
     /*小说分类下拉内容*/
-    novelClassify:[]
-
+    novelClassify:[],
+    /*修改小说分类传值*/
+    novelClassifyId:'',
+    novelClassifyName:''
   },
   mutations:{
     /*用户信息的传值*/
@@ -39,6 +41,11 @@ export default new Vuex.Store({
     /*清除小说分类的传值  因为这里重复加载会重复push*/
     removeNovelClassify(state){
       state.novelClassify = []
+    },
+    /*修改小说分类传值*/
+    setNovelClassify(state,data){
+      state.novelClassifyId = data.id
+      state.novelClassifyName = data.name
     }
   }
 })

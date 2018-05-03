@@ -1,9 +1,8 @@
 <template>
-  <div class="novel-classify-edit">
+  <div class="add-novel-classify">
     <!--顶部条开始-->
     <div class="top">
-      <h1 class="title">编辑小说分类</h1>
-      <router-link to="/novelClassify"><div><el-button>退出编辑</el-button></div></router-link>
+      <h1 class="title">新增小说分类</h1>
     </div>
     <!--顶部条结束-->
     <!--内容-->
@@ -36,10 +35,23 @@
 <script>
   import ajax from '../fun/ajax.js'
   export default{
-    name:'novelClassifyEdit',
+    name:'addNovelClassify',
     created(){
-      this.id = this.$store.state.novelClassifyId
-      this.name = this.$store.state.novelClassifyName
+      var that = this
+      ajax.ajax({
+        url: "", //请求地址
+        type: 'post',   //请求方式
+        data: '', //请求参数
+        dataType: "json",     // 返回值类型的设定
+        async: true,   //是否异步
+        success: function (response, xml) {
+          that.id = response
+        },
+        fail: function (status) {
+          alert("服务器故障 无法获取新增ID 本次添加将无效")
+          console.log('状态码为' + status);   // 此处为执行成功后的代码
+        }
+      })
     },
     data(){
       return{
@@ -48,7 +60,6 @@
       }
     },
     methods:{
-      /*提交 确认修改*/
       submit(){
         var that = this
         ajax.ajax({
@@ -58,32 +69,32 @@
           dataType: "json",     // 返回值类型的设定
           async: true,   //是否异步
           success: function (response, xml) {
-            alert("修改成功")
+            alert("新增成功")
           },
           fail: function (status) {
+            alert("新增失败")
             console.log('状态码为' + status);   // 此处为执行成功后的代码
           }
         })
       }
     }
-
   }
 </script>
 <style>
   /*顶部*/
-  .novel-classify-edit .top{
+  .add-novel-classify .top{
     width: 1190px;
     height: 60px;
     background-color: #8cc5ff;
   }
-  .novel-classify-edit .title{
+  .add-novel-classify .title{
     font-size: 18px;
     line-height: 60px;
     margin-left: 20px;
     font-weight: bold;
     display: inline-block;
   }
-  .novel-classify-edit .top div{
+  .add-novel-classify .top div{
     float: right;
     line-height: 60px;
     display: inline-block;
@@ -91,14 +102,14 @@
   }
 
   /*内容*/
-  .novel-classify-edit .content .flex-wrap{
+  .add-novel-classify .content .flex-wrap{
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
 
     align-items: center;
   }
-  .novel-classify-edit .content .flex-wrap .item{
+  .add-novel-classify .content .flex-wrap .item{
 
     width: 400px;
     display: flex;
@@ -106,23 +117,23 @@
     justify-content: space-between;
     margin-top: 20px;
   }
-  .novel-classify-edit .content .flex-wrap .item input{
+  .add-novel-classify .content .flex-wrap .item input{
     height: 30px;
     font-size: 20px;
   }
-  .novel-classify-edit .item-left,.novel-classify-edit .item-right{
+  .add-novel-classify .item-left,.novel-classify-edit .item-right{
     float: left;
     width: 50%;
 
   }
-  .novel-classify-edit .item-left{
+  .add-novel-classify .item-left{
     display: flex;
     display: -webkit-flex;
     justify-content: flex-end;
     align-items: center;
     margin-right: 20px;
   }
-  .novel-classify-edit .submit{
+  .add-novel-classify .submit{
     margin-top: 20px;
     margin-left: 140px;
   }

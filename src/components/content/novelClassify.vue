@@ -75,12 +75,31 @@
     },
     methods:{
       /*表格操作方法*/
+      /*编辑分类*/
       handleEdit(index,row){
         console.log(index,row,'编辑')
+        var obj = {id:row.id,name:row.name}
+        this.$store.commit('setNovelClassify',obj)
       },
+      /*删除分类*/
       handleRecover(index,row){
         console.log(index,row,'删除')
+
+        ajax.ajax({
+          url: "", //请求地址
+          type: 'post',   //请求方式
+          data: {id:row.id,name:row.name}, //请求参数
+          dataType: "json",     // 返回值类型的设定
+          async: true,   //是否异步
+          success: function (response, xml) {
+            alert("修改成功")
+          },
+          fail: function (status) {
+            console.log('状态码为' + status);   // 此处为执行成功后的代码
+          }
+        })
       },
+
     }
   }
 </script>

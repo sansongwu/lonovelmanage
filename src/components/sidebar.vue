@@ -42,8 +42,10 @@
       </template>
       <router-link to="/novelInfo"><el-menu-item index="2-1">小说信息</el-menu-item></router-link>
       <router-link to="/novelClassify"><el-menu-item index="2-2">小说分类</el-menu-item></router-link>
-      <router-link to="/addNovel"><el-menu-item index="2-3">新增小说</el-menu-item></router-link>
-      <router-link to="/indexClassify4"><el-menu-item index="2-4" v-on:click="setindexClassify(4)">类目4</el-menu-item></router-link>
+      <router-link to="/addNovelClassify"><el-menu-item index="2-3">添加小说分类</el-menu-item></router-link>
+      <router-link to="/addNovel"><el-menu-item index="2-4">新增小说</el-menu-item></router-link>
+      <router-link to="/addChapter"><el-menu-item index="2-4">新增章节</el-menu-item></router-link>
+
     </el-submenu>
   </el-menu>
 </template>
