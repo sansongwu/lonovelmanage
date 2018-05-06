@@ -68,8 +68,8 @@
         </div>
         <form ref="uploadform" id = "fileform">
           <input id="file" type="file" name="coverImg"/>
-          <input type="text" v-model="novelInfo.bookName" style="display: none">
-          <input type="text" v-model="novelInfo.author" style="display: none">
+          <input type="text" v-model="novelInfo.bookName" >
+          <input type="text" v-model="novelInfo.author" >
           <input type="text" v-model="novelInfo.label" style="display: none">
           <input type="text" v-model="novelInfo.type" style="display: none">
           <input type="text" v-model="novelInfo.translater" style="display: none">
@@ -144,15 +144,20 @@
           var image = new FormData()
           image.append('avatar', this.$refs.uploadform.files[0])
         }*/
-
+        this.novelInfo.label = ''
         this.novelInfo.label = this.novelInfo.label.split('&')
         console.log(this.novelClassify)
         console.log(this.novelInfo)
         var that = this
+        var data = new FormData(that.$refs.uploadform)
+        for(var key in this.novelInfo){
+          data[key] = this.novelInfo[key]
+        }
+        alert(data)
         ajax.file({
           url: "/lonovel/admin/addnovel", //请求地址
           type: 'post',   //请求方式
-          data: new FormData(that.$refs.uploadform), //请求参数
+          data: data, //请求参数
           dataType: "json",     // 返回值类型的设定
           async: true,   //是否异步
           success: function (response, xml) {
