@@ -128,10 +128,10 @@ export default {
     //options.url = "mock"+options.url
 
     /*测试环境修改url前面加跨域代理名字*/
-    options.url = "aappii"+options.url
+    //options.url = "aappii"+options.url
 
     /*真实环境的url*/
-    //options.url = options.url
+    options.url = options.url
 
 
     /**
@@ -141,7 +141,7 @@ export default {
     /**
      * 默认为GET请求
      * */
-    options.type = (options.type || "GET").toUpperCase();
+
     /**
      * 返回值类型默认为json
      * */
@@ -181,23 +181,20 @@ export default {
         }
       }
     };
-    if (options.type == 'GET'){
-      xhr.open("GET",options.url + '?' + params ,options.async);
-      xhr.send(null)
-    }else if (options.type == 'POST'){
-      /**
-       *打开请求
-       * */
-      xhr.open('POST',options.url,options.async);
-      /**
-       * POST请求设置请求头
-       * */
-      //xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-      /**
-       * 发送请求参数
-       */
-      xhr.send(this.getParams(options.data));
-    }
+
+    /**
+     *打开请求
+     * */
+    xhr.open('POST',options.url,options.async);
+    /**
+     * POST请求设置请求头
+     * */
+    //xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    /**
+     * 发送请求参数
+     */
+    xhr.send(options.data);
+
   },
 
 }

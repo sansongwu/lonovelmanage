@@ -11,7 +11,7 @@
       <div class="item">
         <span>是否展示该类</span>
         <template>
-          <el-select v-model="obj.state" placeholder="请选择">
+          <el-select v-model="value" placeholder="请选择">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -102,13 +102,13 @@
         show:true,
 
         options: [{
-          value: '0',
+          value: 0,
           label: '不展示'
         }, {
-          value: '1',
+          value: 1,
           label: '展示'
         }],
-
+        value:'',
         obj:{
           id:this.indexClassify,
           state: 0,
@@ -157,6 +157,7 @@
           async: true,   //是否异步
           success: function (response, xml) {
             var data = response.extend.index
+            console.log(data)
             /*that.categoryName = data.categoryName
             that.state = data.state
             that.show01 = data.show01
@@ -169,6 +170,7 @@
             that.show08 = data.show08
             that.show09 = data.show09
             that.show10 = data.show10*/
+            that.value = data.state
             for(var key in data){
               that.obj[key] = data[key]
             }

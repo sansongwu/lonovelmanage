@@ -68,7 +68,13 @@
         </div>
         <form ref="uploadform" id = "fileform">
           <input id="file" type="file" name="coverImg"/>
-          <button id="upload" type="button" v-on:click="subfile">upload</button>
+          <input type="text" v-model="novelInfo.bookName" style="display: none">
+          <input type="text" v-model="novelInfo.author" style="display: none">
+          <input type="text" v-model="novelInfo.label" style="display: none">
+          <input type="text" v-model="novelInfo.type" style="display: none">
+          <input type="text" v-model="novelInfo.translater" style="display: none">
+          <input type="text" v-model="novelInfo.showRead" style="display: none">
+          <!--<button id="upload" type="button" v-on:click="subfile">upload</button>-->
         </form>
 
 
@@ -146,7 +152,7 @@
         ajax.file({
           url: "/lonovel/admin/addnovel", //请求地址
           type: 'post',   //请求方式
-          data: new FormData(that.$refs.uploadform[0]), //请求参数
+          data: new FormData(that.$refs.uploadform), //请求参数
           dataType: "json",     // 返回值类型的设定
           async: true,   //是否异步
           success: function (response, xml) {
@@ -182,25 +188,33 @@
       subfile(){
         var form=document.getElementById("fileform");
         var formData=new FormData(form);
-        //alert(formData.name);
-        var oReq = new XMLHttpRequest();
+        ajax.file({
+          url: "aappii/lonovel/admin/addnovel", //请求地址
+          data: formData, //请求参数
+          dataType: "json",     // 返回值类型的设定
+          async: true,   //是否异步
+          success: function (response, xml) {
+            alert("成功了")
+
+          },
+          fail: function (status) {
+            alert("失败了。。。")
+            console.log('状态码为' + status);   // 此处为执行成功后的代码
+          }
+        })
+
+        /*之前的*/
+        /*var oReq = new XMLHttpRequest();
         oReq.onreadystatechange=function(){
           if(oReq.readyState==4){
             if(oReq.status==200){
-              /*console.log(typeof oReq.responseText);
-              var json=JSON.parse(oReq.responseText);
-              var result = '';
-              result +="个人信息：<br/>name:"+json['name']+"<br/>gender:"+json['gender']+"<br/>number:"+json['number'];
-              result += '<br/>头像：<img src="' + json['photo'] + '" height="50" style="border-radius: 50%;" />';
-
-              $('#result').html(result);*/
               alert("成功了")
             }
           }
         };
         oReq.open("POST", "aappii/lonovel/admin/addnovel");
         oReq.send(formData);
-        return false;
+        return false;*/
       }
     }
 
