@@ -80,7 +80,7 @@
 
         <!--提交按钮-->
         <div class="submit" v-on:click="submit">
-          <el-button>确认修改{{}}</el-button>
+          <el-button>提交</el-button>
         </div>
       </div>
 
@@ -151,7 +151,7 @@
         var that = this
         var data = new FormData(that.$refs.uploadform)
         for(var key in this.novelInfo){
-          data[key] = this.novelInfo[key]
+          data.append(key,this.novelInfo[key])
         }
         alert(data)
         ajax.file({
