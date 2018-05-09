@@ -67,13 +67,7 @@
           </div>
         </div>
         <form ref="uploadform" id = "fileform">
-          <input id="file" type="file" name="coverImg"/>
-          <input type="text" v-model="novelInfo.bookName" >
-          <input type="text" v-model="novelInfo.author" >
-          <input type="text" v-model="novelInfo.label" style="display: none">
-          <input type="text" v-model="novelInfo.type" style="display: none">
-          <input type="text" v-model="novelInfo.translater" style="display: none">
-          <input type="text" v-model="novelInfo.showRead" style="display: none">
+          <input id="file" type="file" name="coverImg">
           <!--<button id="upload" type="button" v-on:click="subfile">upload</button>-->
         </form>
 

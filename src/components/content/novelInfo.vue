@@ -112,11 +112,14 @@
               label="展示阅读次数"
               width="120 ">
             </el-table-column>
-            <el-table-column label="操作" width="150">
+            <el-table-column label="操作" width="200">
               <template slot-scope="scope">
-                <el-button
-                  size="mini"
-                  @click="handleUpdown(scope.$index, scope.row)">上下架</el-button>
+                <router-link to="/novelInfo/novelChapter">
+                  <el-button
+                    size="mini"
+                    @click="handleUpdown(scope.$index, scope.row)">小说章节</el-button>
+                </router-link>
+
 
                 <router-link to="/novelInfo/edit">
                   <el-button
@@ -144,7 +147,6 @@
       </div>
 
     </div>
-    <!--编辑信息 子路由-->
     <router-view></router-view>
   </div>
 </template>
@@ -269,16 +271,8 @@
       /*上下架  编辑  操作*/
       /*上下架  ajax*/
       handleUpdown(index, row) {
-        console.log(index, row,"上下架");
-        if(row.state==0){
-          console.log(row.state);
-          ajax.setState({
-            url:'',
-            id:this.id,
-            state:1,   //要修改成的状态的值
-            targetRow:row
-          })
-        }
+        console.log(index, row,"增加章节");
+        this.$store.commit('getNovelInfo',row)
       },
       /*编辑  ajax*/
       handleEdit(index, row) {
@@ -301,7 +295,6 @@
   }
 </script>
 <style>
-  /*大局观*/
   .novel-info{
     position: relative;
   }

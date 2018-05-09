@@ -8,14 +8,7 @@
     <!--内容-->
     <div class="content">
       <div class="flex-wrap">
-        <div class="item clearfix">
-          <div class="item-left">
-            <span>ID:</span>
-          </div>
-          <div class="item-right">
-            <input type="text" readonly v-model="id">
-          </div>
-        </div>
+
         <div class="item clearfix">
           <div class="item-left">
             <span>分类名:</span>
@@ -26,7 +19,7 @@
         </div>
         <!--提交-->
         <div class="submit" v-on:click="submit">
-          <el-button>确认修改</el-button>
+          <el-button>提交</el-button>
         </div>
       </div>
     </div>
@@ -36,23 +29,6 @@
   import ajax from '../fun/ajax.js'
   export default{
     name:'addNovelClassify',
-    created(){
-      var that = this
-      ajax.ajax({
-        url: "", //请求地址
-        type: 'post',   //请求方式
-        data: '', //请求参数
-        dataType: "json",     // 返回值类型的设定
-        async: true,   //是否异步
-        success: function (response, xml) {
-          that.id = response
-        },
-        fail: function (status) {
-          alert("服务器故障 无法获取新增ID 本次添加将无效")
-          console.log('状态码为' + status);   // 此处为执行成功后的代码
-        }
-      })
-    },
     data(){
       return{
         id:'',
@@ -63,9 +39,9 @@
       submit(){
         var that = this
         ajax.ajax({
-          url: "", //请求地址
+          url: "/lonovel/admin/addtype", //请求地址
           type: 'post',   //请求方式
-          data: {id:that.id,name:that.name}, //请求参数
+          data: {name:that.name}, //请求参数
           dataType: "json",     // 返回值类型的设定
           async: true,   //是否异步
           success: function (response, xml) {

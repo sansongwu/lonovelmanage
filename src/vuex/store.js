@@ -16,7 +16,10 @@ export default new Vuex.Store({
     novelClassify:[],
     /*修改小说分类传值*/
     novelClassifyId:'',
-    novelClassifyName:''
+    novelClassifyName:'',
+
+    /*小说章节 新增章节遮罩*/
+    newChapterDark:false
   },
   mutations:{
     /*用户信息的传值*/
@@ -46,6 +49,11 @@ export default new Vuex.Store({
     setNovelClassify(state,data){
       state.novelClassifyId = data.id
       state.novelClassifyName = data.name
+    },
+
+    /*获取 小说章节 新增章节遮罩*/
+    getChapterDark(state,data){
+      state.newChapterDark = data
     }
   }
 })

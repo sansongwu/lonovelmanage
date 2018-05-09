@@ -138,12 +138,11 @@
     position: absolute;
     top:0;
     left: 0;
-    z-index: 2;
     width: 100%;
     height: 900px;
     background-color: #ffffff;
+    z-index: 2;
   }
-
   /*顶部*/
   .novel-edit .top{
     width: 1190px;

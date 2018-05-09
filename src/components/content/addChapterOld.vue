@@ -2,7 +2,6 @@
   <div class="add-chapter">
     <div class="top">
       <h1 class="title">新增章节</h1>
-      <span class="close" v-on:click="close"><el-button>关闭</el-button></span>
     </div>
 
     <!--内容-->
@@ -36,17 +35,11 @@
             <span>请输入章节名:</span>
           </div>
           <div class="item-right">
-            <input type="text" v-model="chapterName">
+            <input type="text" v-model="id">
           </div>
 
         </div>
-        <form ref="uploadform2" id = "fileform">
-          <input id="file" type="file" name="chapterContent">
-        </form>
-        <!--提交按钮-->
-        <div class="submit" v-on:click="submit">
-          <el-button>提交</el-button>
-        </div>
+
       </div>
     </div>
   </div>
@@ -56,15 +49,14 @@
   export default{
     name:'addChapter',
     created(){
-      console.log("弹窗生成")
       /*获取页面传值的小说数据*/
       this.novelInfo = this.$store.state.stateNovelInfo
       /*提交小说id 获取章数*/
       var that = this
-      /*ajax.ajax({
+      ajax.ajax({
         url: "", //请求地址
         type: 'post',   //请求方式
-        data: {}, //请求参数
+        data: {id:that.novelInfo.id}, //请求参数
         dataType: "json",     // 返回值类型的设定
         async: true,   //是否异步
         success: function (response, xml) {
@@ -74,39 +66,19 @@
         fail: function (status) {
           console.log('状态码为' + status);   // 此处为执行成功后的代码
         }
-      })*/
+      })
     },
     data(){
       return {
+
+
+
         novelInfo:'',
-        chapterName:''
+        chapterSum:''
       }
     },
     methods:{
-      close(){
-        this.$store.commit('getChapterDark',false)
-      },
-      submit(){
-        var that = this
-        var data = new FormData(that.$refs.uploadform2)
 
-        data.append("chapterName",this.chapterName)
-
-        ajax.ajax({
-         url: "/lonovel/admin/initaddchapter", //请求地址
-         type: 'post',   //请求方式
-         data: data, //请求参数
-         dataType: "json",     // 返回值类型的设定
-         async: true,   //是否异步
-         success: function (response, xml) {
-         alert("提交成功")
-         },
-         fail: function (status) {
-           alert("失败了")
-         console.log('状态码为' + status);   // 此处为执行成功后的代码
-         }
-         })
-      }
     }
   }
 </script>
@@ -116,7 +88,7 @@
     top:50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    width: 500px;
+    width: 50%;
     height: 500px;
     background-color: #ffffff;
     border: 2px solid red;
@@ -124,7 +96,7 @@
   }
   /*顶部*/
   .add-chapter .top{
-    width: 100%;
+    width: 1190px;
     height: 60px;
     background-color: #8cc5ff;
   }
@@ -134,17 +106,8 @@
     margin-left: 20px;
     font-weight: bold;
   }
-  .add-chapter .close{
-    float: right;
-    margin-right: 20px;
-  }
 
   /*内容*/
-  .add-chapter .content{
-    width: 100%;
-    height: 100%;
-
-  }
   .add-chapter .content .flex-wrap{
     display: flex;
     display: -webkit-flex;
@@ -166,7 +129,7 @@
   }
   .add-chapter .item-left,.add-chapter .item-right{
     float: left;
-    width: 140px;
+    width: 300px;
 
   }
   .add-chapter .item-left{
@@ -174,12 +137,11 @@
     display: -webkit-flex;
     justify-content: flex-end;
     align-items: center;
-  }
-  .add-chapter .item-right{
-    margin-right: 80px;
+    margin-right: 20px;
+
   }
   .add-chapter .submit{
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 140px;
   }
 </style>

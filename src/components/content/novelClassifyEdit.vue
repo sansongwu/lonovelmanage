@@ -52,7 +52,7 @@
       submit(){
         var that = this
         ajax.ajax({
-          url: "", //请求地址
+          url: "/lonovel/admin/edittype", //请求地址
           type: 'post',   //请求方式
           data: {id:that.id,name:that.name}, //请求参数
           dataType: "json",     // 返回值类型的设定

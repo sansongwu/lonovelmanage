@@ -86,7 +86,7 @@
         console.log(index,row,'删除')
 
         ajax.ajax({
-          url: "", //请求地址
+          url: "/lonovel/admin/deletetype", //请求地址
           type: 'post',   //请求方式
           data: {id:row.id,name:row.name}, //请求参数
           dataType: "json",     // 返回值类型的设定

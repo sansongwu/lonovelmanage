@@ -13,6 +13,7 @@ import novelClassifyEdit from '@/components/content/novelClassifyEdit'
 import addNovel from '@/components/content/addNovel'
 import addNovelClassify from '@/components/content/addNovelClassify'
 import addChapter from '@/components/content/addChapter'
+import novelChapter from '@/components/content/novelChapter'
 
 
 Vue.use(Router)
@@ -29,6 +30,7 @@ export default new Router({
       name:'userManage',
       component:userManage
     },
+    /*资金管理*/
     {
       path:'/financialManage',
       name:'financialManage',
@@ -39,6 +41,8 @@ export default new Router({
         component: financialManageDetail
       }]
     },
+    /*资金明细*/
+
     /*首页管理*/
     {
       path:'/indexClassify1',
@@ -65,11 +69,28 @@ export default new Router({
       path:'/novelInfo',
       name:'novelInfo',
       component:novelInfo,
-      children:[{
-        path: 'edit',
-        name: 'novelEdit',
-        component: novelEdit
-      }]
+      children:[
+        /*编辑小说*/
+        {
+          path: 'edit',
+          name: 'novelEdit',
+          component: novelEdit
+        },
+        /*小说章节*/
+        {
+          path:'novelChapter',
+          component:novelChapter
+        },
+      ]
+    },
+
+
+
+    /*新增小说章节*/
+    {
+      path:'/novelInfo/addChapter',
+      /*name:'addChapter',*/
+      component:addChapter
     },
     /*小说分类*/
     {
@@ -94,11 +115,6 @@ export default new Router({
       name:'addNovel',
       component:addNovel
     },
-    /*新增小说章节*/
-    {
-      path:'/addChapter',
-      /*name:'addChapter',*/
-      component:addChapter
-    },
+
   ]
 })
