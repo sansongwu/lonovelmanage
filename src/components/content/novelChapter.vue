@@ -20,10 +20,10 @@
         <!--表格内容-->
         <template>
           <el-table :data="chapterInfo" border style="width: 100%">
-            <el-table-column prop="num" label="序号" width="120"></el-table-column>
-            <el-table-column prop="chapterName" label="章节名" width="340"></el-table-column>
-            <el-table-column prop="translater" label="翻译者" width="240"></el-table-column>
-            <el-table-column prop="time" label="更新时间" width="380"></el-table-column>
+            <el-table-column prop="index" label="序号" width="120"></el-table-column>
+            <el-table-column prop="indexName" label="章节名" width="340"></el-table-column>
+            <el-table-column prop="translator" label="翻译者" width="240"></el-table-column>
+            <el-table-column prop="c1" label="更新时间" width="380"></el-table-column>
             <el-table-column label="操作" width="100">
               <template slot-scope="scope">
                 <el-button
@@ -77,10 +77,10 @@
         novelInfo: '',
         count: '',
         chapterInfo:[{
-          num:'',
-          chapterName:'',
-          translater:'',
-          time:'',
+          index:'',
+          indexName:'',
+          translator:'',
+          c1:'',
         }
         ],
         /*分页器*/
@@ -94,20 +94,21 @@
       submit(){
         var that = this
         ajax.ajax({
-          url: "/lonovel/admin/initaddchapter", //请求地址
+          url: "/lonovel/admin/chaptermanager", //请求地址
           type: 'post',   //请求方式
           data: that.novelInfo, //请求参数
           dataType: "json",     // 返回值类型的设定
           async: true,   //是否异步
           success: function (response, xml) {
-            that.financialDetail = []
+            that.chapterInfo = []
             var data = response.extend.page.list
-            that.totalRows = response.extend.page.total
-            for(let i = 0 ; i < data.length ; i++){
-              that.financialDetail.push(data[i])
+            for(var i = 0 ; i < data.length ; i ++){
+              that.chapterInfo.push(data[i])
             }
+            that.totalRows = response.extend.page.total
           },
           fail: function (status) {
+            alert("加载错误")
             console.log('状态码为' + status);   // 此处为执行成功后的代码
           }
         })
@@ -120,13 +121,11 @@
       setChapter(index, row) {
         console.log(index, row,"修改章节");
         this.$store.commit('getChapterDark',true)
-
       },
       /*关闭遮罩*/
       closeDark(){
         //this.show = false
         this.$store.commit('getChapterDark',false)
-
       },
       /*分页器方法*/
       /*点击分页器页码*/
@@ -134,7 +133,6 @@
         console.log(`当前页: ${val}`);
         Vue.set(this.novelInfo, "pageNo", val)
         this.submit()
-
       },
     },
   }
