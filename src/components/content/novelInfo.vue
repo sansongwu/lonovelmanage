@@ -156,6 +156,7 @@
     name:'novelInfo',
     created(){
       this.init()
+      this.submit()
       console.log("小说信息组件创建")
     },
     data(){

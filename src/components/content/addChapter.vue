@@ -10,15 +10,12 @@
       <div class="flex-wrap">
         <div class="item clearfix">
           <div class="item-left">
-            <span>id:</span>
+            <span>书id:</span>
           </div>
           <div class="item-right">
             <span>{{novelInfo.id}}</span>
           </div>
-
         </div>
-
-
 
         <!--书的名字展示-->
         <div class="item clearfix">
@@ -29,6 +26,16 @@
             <span>{{novelInfo.bookName}}</span>
           </div>
         </div>
+        <!--章节序号-->
+        <div class="item clearfix">
+          <div class="item-left">
+            <span>章节序号:</span>
+          </div>
+          <div class="item-right">
+            <span>{{index}}</span>
+          </div>
+
+        </div>
 
         <!--章节名字-->
         <div class="item clearfix">
@@ -38,8 +45,17 @@
           <div class="item-right">
             <input type="text" v-model="chapterName">
           </div>
-
         </div>
+        <!--翻译者-->
+        <div class="item clearfix">
+          <div class="item-left">
+            <span>翻译者:</span>
+          </div>
+          <div class="item-right">
+            <input type="text" v-model="translator">
+          </div>
+        </div>
+
         <form ref="uploadform2" id = "fileform">
           <input id="file" type="file" name="chapterContent">
         </form>
@@ -75,11 +91,24 @@
           console.log('状态码为' + status);   // 此处为执行成功后的代码
         }
       })*/
+
+    },
+    mounted(){
+      console.log("mounted")
+      var data = this.$store.state.novelChapterInfo
+      this.id = data.id
+      this.novelId = data.novelId
+      this.index = data.index
     },
     data(){
       return {
         novelInfo:'',
-        chapterName:''
+        chapterName:'',
+        translator:'',
+
+        id:'',
+        novelId:'',
+        index:''
       }
     },
     methods:{
@@ -87,27 +116,42 @@
         this.$store.commit('getChapterDark',false)
       },
       submit(){
+        if(this.chapterName == '' || this.translator == ''){
+          alert("不能为空")
+          return
+        }
+
         var that = this
         var data = new FormData(that.$refs.uploadform2)
 
-        data.append("chapterName",this.chapterName)
+        data.append("name",this.chapterName)
+        data.append("index",this.index)
+        data.append("id",this.id)
+        data.append("novelId",this.novelId)
+        data.append("translator",this.translator)
 
         ajax.ajax({
-         url: "/lonovel/admin/initaddchapter", //请求地址
+         url: "/lonovel/admin/addchapter", //请求地址
          type: 'post',   //请求方式
          data: data, //请求参数
          dataType: "json",     // 返回值类型的设定
          async: true,   //是否异步
          success: function (response, xml) {
-         alert("提交成功")
+           if(response.code == 200){
+             alert("提交成功")
+           }else{
+             alert("必须上传文件  并且上传正确格式的文件")
+           }
+
          },
          fail: function (status) {
            alert("失败了")
          console.log('状态码为' + status);   // 此处为执行成功后的代码
          }
-         })
+        })
       }
-    }
+    },
+
   }
 </script>
 <style>

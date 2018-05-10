@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="dark" v-show="this.$store.state.newChapterDark" v-on:click="closeDark"></div>
-      <div v-show="this.$store.state.newChapterDark">
+      <div v-if="this.$store.state.newChapterDark">
         <addChapter></addChapter>
       </div>
 
@@ -76,12 +76,18 @@
       return {
         novelInfo: '',
         count: '',
-        chapterInfo:[{
-          index:'',
-          indexName:'',
-          translator:'',
-          c1:'',
-        }
+        chapterInfo:[
+          {
+            /*展示项*/
+            index:'',
+            indexName:'',
+            translator:'',
+            c1:'',
+            /*隐藏项*/
+            novleId:'',
+            id:'',
+
+          }
         ],
         /*分页器*/
         totalRows:0,
@@ -115,12 +121,33 @@
       },
       /*新增章节*/
       newChapter(){
+        /*控制遮罩*/
         this.$store.commit('getChapterDark',true)
+        /*传值*/
+        var data = {
+          "novleId":this.novelInfo.id,
+          "id":'',
+          "index":this.totalRows+1
+        }
+        console.log(data.index)
+        this.$store.commit('getNovelChapterInfo',data)
       },
       /*操作 修改章节*/
       setChapter(index, row) {
         console.log(index, row,"修改章节");
         this.$store.commit('getChapterDark',true)
+
+        /*传送小说+章节信息*/
+        var data = {
+          "novleId":row.novelId,
+          "id":row.id,
+          "index":row.index
+        }
+        console.log(data.index)
+        this.$store.commit('getNovelChapterInfo',data)
+        //this.$store.dispatch('increment')
+        console.log(this.$store.state.novelChapterInfo.index)
+
       },
       /*关闭遮罩*/
       closeDark(){
