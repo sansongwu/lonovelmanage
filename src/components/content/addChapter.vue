@@ -130,7 +130,7 @@
         data.append("novelId",this.novelId)
         data.append("translator",this.translator)
 
-        ajax.ajax({
+        ajax.file({
          url: "/lonovel/admin/addchapter", //请求地址
          type: 'post',   //请求方式
          data: data, //请求参数
