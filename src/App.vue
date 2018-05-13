@@ -1,6 +1,8 @@
 <template>
   <div class="box">
-    <div id="app">
+    <login v-if="!$store.state.login"></login>
+
+    <div id="app" v-if="$store.state.login">
       <div class="head"></div>
       <div class="bottombox clearfix">
         <div class="side">
@@ -18,9 +20,16 @@
 
 <script>
   import sidebar from "./components/sidebar.vue"
+  import login from "./components/login.vue"
 export default {
   name: 'App',
-  components:{sidebar}
+  components:{sidebar,login},
+  data(){
+    return{
+
+    }
+
+  }
 }
 </script>
 

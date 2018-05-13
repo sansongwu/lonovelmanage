@@ -8,7 +8,7 @@
   export default{
     name:'home',
     created(){
-      var data = {
+      /*var data = {
         id:"d711f63d-07f7-4ac6-9a1d-7c3d5ced0bdf"
       }
       ajax.ajax({
@@ -26,7 +26,7 @@
           alert("失败了。。。")
           console.log('状态码为' + status);   // 此处为执行成功后的代码
         }
-      })
+      })*/
     },
     data(){
       return {

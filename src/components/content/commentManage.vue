@@ -111,9 +111,7 @@
             @current-change="handleCurrentChange">
           </el-pagination>
         </div>
-
       </div>
-
     </div>
   </div>
 </template>
@@ -152,6 +150,7 @@
             novelName:'',
             content:'',
             commentTime:'',
+            commentId:'',
           }
         ],
         /*总条数*/
@@ -179,53 +178,55 @@
           dataType: "json",     // 返回值类型的设定
           async: true,   //是否异步
           success: function (response, xml) {
-            alert("成功了")
-            alert(response)
+            that.commentInfo = []
+            var data = response.extend.page.list
+            for(var i = 0 ; i < data.length ; i ++){
+              that.commentInfo.push(data[i])
+            }
+            that.totalRows = response.extend.page.total
           },
           fail: function (status) {
             console.log('状态码为' + status);   // 此处为执行成功后的代码
           }
         })
       },
-      /*停封 恢复 操作*/
-      /*恢复  ajax*/
+      /*浏览全部 删除 操作*/
+      /*浏览全部*/
       handleBrowse(index, row) {
-        console.log(index, row,"恢复");
+        console.log(index, row,"浏览全部");
+
 
       },
-      /*停封  ajax*/
+      /*删除*/
       handleDelete(index, row) {
-        console.log(index, row,"停封");
+        console.log(index, row,"删除");
+        var that = this
+        ajax.ajax({
+          url: "/lonovel/admin/deletecomment", //请求地址
+          type: 'post',   //请求方式
+          data:{commentId:row.commentId} , //请求参数
+          dataType: "json",     // 返回值类型的设定
+          async: true,   //是否异步
+          success: function (response, xml) {
+            if(response.code == 200){
+              alert("删除成功")
+              that.submit()
+            }else{
+              alert("删除失败")
+            }
 
+          },
+          fail: function (status) {
+            console.log('状态码为' + status);   // 此处为执行成功后的代码
+          }
+        })
       },
       /*分页器方法*/
       /*点击分页器页码*/
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
-        Vue.set(this.obj, "pageNo", val)
-        console.log(this.obj)
-        var that = this
-        ajax.ajax(
-          {
-            url: "/lonovel/admin/usermanager", //请求地址
-            type: 'post',   //请求方式
-            data: that.obj, //请求参数
-            dataType: "json",     // 返回值类型的设定
-            async: true,   //是否异步
-            success: function (response, xml) {
-              /*var response = JSON.parse(response)*/
-              that.userInfo = []
-              var data = response.extend.page.list
-              that.totalRows = response.extend.page.total
-              for(let i = 0 ; i < data.length ; i++){
-                that.userInfo.push(data[i])
-              }
-            },
-            fail: function (status) {
-              console.log('状态码为' + status);   // 此处为执行成功后的代码
-            }
-          }
-        )
+        this.pageNo = val
+        this.submit()
       },
     },
     watch: {

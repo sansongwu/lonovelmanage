@@ -9,6 +9,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state:{
+    /*登陆状态 整个内容是否显示*/
+    login:false,
+
+
     stateUserInfo: {},
     indexClassify:0,
     stateNovelInfo: {},
@@ -25,6 +29,10 @@ export default new Vuex.Store({
     novelChapterInfo:{}
   },
   mutations:{
+    /*登陆状态*/
+    getLogin(state,data){
+      state.login = !state.login
+    },
     /*用户信息的传值*/
     getuserInfo(state,data){
        state.stateUserInfo = data
