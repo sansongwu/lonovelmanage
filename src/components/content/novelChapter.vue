@@ -143,7 +143,7 @@
           "id":row.id,
           "index":row.index
         }
-        console.log(data.index)
+        console.log(data.novelId)
         this.$store.commit('getNovelChapterInfo',data)
         //this.$store.dispatch('increment')
         console.log(this.$store.state.novelChapterInfo.index)

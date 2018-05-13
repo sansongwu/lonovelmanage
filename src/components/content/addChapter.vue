@@ -13,7 +13,7 @@
             <span>书id:</span>
           </div>
           <div class="item-right">
-            <span>{{novelInfo.id}}</span>
+            <span>{{novelId}}</span>
           </div>
         </div>
 
@@ -75,6 +75,11 @@
       console.log("弹窗生成")
       /*获取页面传值的小说数据*/
       this.novelInfo = this.$store.state.stateNovelInfo
+
+      var data = this.$store.state.novelChapterInfo
+      this.id = data.id
+      this.novelId = data.novelId
+      this.index = data.index
       /*提交小说id 获取章数*/
       var that = this
       /*ajax.ajax({
@@ -91,14 +96,7 @@
           console.log('状态码为' + status);   // 此处为执行成功后的代码
         }
       })*/
-
-    },
-    mounted(){
-      console.log("mounted")
-      var data = this.$store.state.novelChapterInfo
-      this.id = data.id
-      this.novelId = data.novelId
-      this.index = data.index
+      console.log(this.novelInfo)
     },
     data(){
       return {
