@@ -81,21 +81,7 @@
       this.novelId = data.novelId
       this.index = data.index
       /*提交小说id 获取章数*/
-      var that = this
-      /*ajax.ajax({
-        url: "", //请求地址
-        type: 'post',   //请求方式
-        data: {}, //请求参数
-        dataType: "json",     // 返回值类型的设定
-        async: true,   //是否异步
-        success: function (response, xml) {
-          var data = response.extend.chapterSum
-          that.chapterSum = data + 1
-        },
-        fail: function (status) {
-          console.log('状态码为' + status);   // 此处为执行成功后的代码
-        }
-      })*/
+
       console.log(this.novelInfo)
     },
     data(){
