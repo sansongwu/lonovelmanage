@@ -123,6 +123,7 @@
          success: function (response, xml) {
            if(response.code == 200){
              alert("提交成功")
+             this.$store.commit('getChapterDark',false)
            }else{
              alert("必须上传文件  并且上传正确格式的文件")
            }

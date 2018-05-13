@@ -44,9 +44,16 @@
       <router-link to="/novelClassify"><el-menu-item index="2-2">小说分类</el-menu-item></router-link>
       <router-link to="/addNovelClassify"><el-menu-item index="2-3">添加小说分类</el-menu-item></router-link>
       <router-link to="/addNovel"><el-menu-item index="2-4">新增小说</el-menu-item></router-link>
-      <router-link to="/addChapter"><el-menu-item index="2-5">新增章节</el-menu-item></router-link>
-
     </el-submenu>
+
+    <router-link to="/commentManage">
+      <el-menu-item index="5">
+        <i class="el-icon-home"></i>
+        <span slot="title">评论管理</span>
+      </el-menu-item>
+    </router-link>
+
+
   </el-menu>
 </template>
 <script>

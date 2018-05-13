@@ -14,6 +14,7 @@ import addNovel from '@/components/content/addNovel'
 import addNovelClassify from '@/components/content/addNovelClassify'
 import addChapter from '@/components/content/addChapter'
 import novelChapter from '@/components/content/novelChapter'
+import commentManage from '@/components/content/commentManage'
 
 
 Vue.use(Router)
@@ -116,5 +117,12 @@ export default new Router({
       component:addNovel
     },
 
+
+    /*5.评论管理*/
+    {
+      path:'/commentManage',
+      name:'commentManage',
+      component:commentManage
+    },
   ]
 })

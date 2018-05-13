@@ -122,55 +122,16 @@
       <div class="user-manage-info">
         <!--表格内容-->
         <template>
-          <el-table
-            :data="userInfo"
-            border
-            style="width: 100%">
-            <el-table-column
-              prop="id"
-              label="id"
-              width="80">
-            </el-table-column>
-            <el-table-column
-              prop="nickname"
-              label="昵称"
-              width="100">
-            </el-table-column>
-            <el-table-column
-            prop="email"
-            label="邮箱"
-            width="160">
-            </el-table-column>
-            <el-table-column
-              prop="facebook"
-              label="Facebook"
-              width="160">
-            </el-table-column>
-            <el-table-column
-              prop="twitter"
-              label="Twitter"
-              width="160">
-            </el-table-column>
-            <el-table-column
-              prop="google"
-              label="google+"
-              width="120">
-            </el-table-column>
-            <el-table-column
-              prop="money"
-              label="用户资金"
-              width="80">
-            </el-table-column>
-            <el-table-column
-              prop="registerTime"
-              label="注册时间"
-              width="120 ">
-            </el-table-column>
-            <el-table-column
-              prop="state"
-              label="状态"
-              width="40">
-            </el-table-column>
+          <el-table :data="userInfo" border style="width: 100%">
+            <el-table-column prop="id" label="id" width="80"></el-table-column>
+            <el-table-column prop="nickname" label="昵称" width="100"></el-table-column>
+            <el-table-column prop="email" label="邮箱" width="160"></el-table-column>
+            <el-table-column prop="facebook" label="Facebook" width="160"></el-table-column>
+            <el-table-column prop="twitter" label="Twitter" width="160"></el-table-column>
+            <el-table-column prop="google" label="google+" width="120"></el-table-column>
+            <el-table-column prop="money" label="用户资金" width="80"></el-table-column>
+            <el-table-column prop="registerTime" label="注册时间" width="120 "></el-table-column>
+            <el-table-column prop="state" label="状态" width="40"></el-table-column>
             <el-table-column label="操作" width="150">
               <template slot-scope="scope">
                 <el-button

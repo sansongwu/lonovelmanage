@@ -10,7 +10,7 @@ import store from './vuex/store'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-require('./mock.js')
+//require('./mock.js')
 
 /* eslint-disable no-new */
 new Vue({
