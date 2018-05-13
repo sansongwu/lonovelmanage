@@ -139,7 +139,7 @@
 
         /*传送小说+章节信息*/
         var data = {
-          "novleId":row.novelId,
+          "novelId":row.novelId,
           "id":row.id,
           "index":row.index
         }

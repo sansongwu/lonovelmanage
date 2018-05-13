@@ -13,7 +13,7 @@
             <span>书id:</span>
           </div>
           <div class="item-right">
-            <span>{{novelId}}</span>
+            <span>{{novelInfo.id}}</span>
           </div>
         </div>
 
@@ -107,11 +107,11 @@
 
         var that = this
         var data = new FormData(that.$refs.uploadform2)
-
+        console.log(this.novelId)
         data.append("name",this.chapterName)
         data.append("index",this.index)
         data.append("id",this.id)
-        data.append("novelId",this.novelId)
+        data.append("novelId",this.novelInfo.id)
         data.append("translator",this.translator)
 
         ajax.file({
